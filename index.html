@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French Store | Système de Certification Professionnelle</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           SYSTEME DE DESIGN : LIGHT MODERN MINIMALISM
+           Inspiration : Apple Support & Stripe Dashboard
+           ==========================================================================
+        */
+
+        :root {
+            /* Palette de couleurs */
+            --primary-blue: #0066FF;
+            --primary-gradient: linear-gradient(135deg, #0066FF 0%, #00CCFF 100%);
+            --bg-body: #F5F7FA;
+            --bg-card: #FFFFFF;
+            --text-main: #1D1D1F;
+            --text-muted: #86868B;
+            --text-light: #F5F5F7;
+            --border-color: #E5E5E7;
+            --success-color: #34C759;
+            --error-color: #FF3B30;
+            
+            /* Paramètres d'espacement et d'élévation */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* Reset Standard */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================================================
+           ANIMATIONS & TRANSITIONS
+           ==========================================================================
+        */
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ==========================================================================
+           LAYOUT PRINCIPAL
+           ==========================================================================
+        */
+
+        .app-wrapper {
+            width: 100%;
+            max-width: 900px;
+            padding: 80px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step {
+            display: none;
+            width: 100%;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeInUp 0.8s var(--transition) forwards;
+        }
+
+        /* ==========================================================================
+           COMPOSANTS UI : CARTES
+           ==========================================================================
+        */
+
+        .card-main {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 60px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .header-section p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ==========================================================================
+           COMPOSANTS UI : FORMULAIRES
+           ==========================================================================
+        */
+
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 20px 25px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 1.1rem;
+            color: var(--text-main);
+            transition: var(--transition);
+            background-color: var(--bg-body);
+        }
+
+        .input-field:focus {
+            border-color: var(--primary-blue);
+            background-color: var(--bg-card);
+            box-shadow: 0 0 15px rgba(0, 102, 255, 0.1);
+        }
+
+        /* ==========================================================================
+           COMPOSANTS UI : BOUTONS
+           ==========================================================================
+        */
+
+        .btn-action {
+            width: 100%;
+            padding: 22px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.3);
+            filter: brightness(1.05);
+        }
+
+        .btn-action:active {
+            transform: translateY(0);
+        }
+
+        /* ==========================================================================
+           COMPOSANTS UI : QUIZ / QUESTIONS
+           ==========================================================================
+        */
+
+        .quiz-container {
+            margin-top: 40px;
+        }
+
+        .section-header {
+            margin: 60px 0 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .badge-section {
+            padding: 5px 15px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .question-card {
+            background: var(--bg-body);
+            border-radius: var(--radius-md);
+            padding: 35px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .question-card:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-blue);
+            background: #fff;
+            box-shadow: var(--shadow-md);
+        }
+
+        .question-cmd {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .question-scenario {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 25px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 18px 25px;
+            background: white;
+            border-radius: 12px;
+            border: 1.5px solid var(--border-color);
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .option-label:hover {
+            border-color: var(--primary-blue);
+            background: rgba(0, 102, 255, 0.02);
+        }
+
+        .option-label input {
+            margin-right: 18px;
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary-blue);
+        }
+
+        .option-label span {
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        /* ==========================================================================
+           STEP 3 : SUCCESS / LOCKED
+           ==========================================================================
+        */
+
+        .success-illustration {
+            width: 120px;
+            height: 120px;
+            background: #E8F5E9;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 30px;
+        }
+
+        .success-illustration svg {
+            color: var(--success-color);
+            width: 60px;
+            height: 60px;
+        }
+
+        /* ==========================================================================
+           RESPONSIVE DESIGN
+           ==========================================================================
+        */
+
+        @media (max-width: 768px) {
+            .card-main {
+                padding: 30px;
+            }
+            .header-section h1 {
+                font-size: 2.2rem;
+            }
+            .question-card {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-wrapper">
+        
+        <div id="step-1" class="step active">
+            <div class="card-main">
+                <div class="header-section">
+                    <h1>Certification Staff</h1>
+                    <p>Accédez au protocole d'examen interne du French Store. Identifiez-vous pour débuter l'évaluation technique.</p>
+                </div>
+
+                <div class="input-group">
+                    <label>Nom d'utilisateur Discord</label>
+                    <input type="text" id="user_discord" class="input-field" placeholder="Ex: Lucas#0001">
+                </div>
+
+                <div class="input-group">
+                    <label>Identifiant Snowflake (ID)</label>
+                    <input type="text" id="id_discord" class="input-field" placeholder="Ex: 1482551717697425428">
+                </div>
+
+                <button class="btn-action" onclick="beginProtocol()">
+                    Commencer l'évaluation
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="step-2" class="step">
+            <div class="card-main">
+                <div class="header-section">
+                    <h1>Examen en cours</h1>
+                    <p>Répondez avec précision aux scénarios ci-dessous. Les fautes graves entraînent une disqualification immédiate.</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="section-header">
+                        <div class="badge-section">Niveau 1</div>
+                        <h2>Support & Logistique</h2>
+                    </div>
+                    <div id="support-render"></div>
+
+                    <div class="section-header">
+                        <div class="badge-section" style="background-color: var(--error-color);">Niveau 2</div>
+                        <h2>Administration & Système</h2>
+                    </div>
+                    <div id="admin-render"></div>
+                </div>
+
+                <button class="btn-action" style="margin-top: 50px;" onclick="finalizeExamen()">
+                    Soumettre mon dossier technique
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="step-3" class="step">
+            <div class="card-main" style="text-align: center;">
+                <div class="success-illustration">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <h1>Dossier Finalisé</h1>
+                <p class="header-section" style="margin-bottom: 20px;">
+                    Vos réponses ont été transmises à l'administration du French Store.
+                    Un examen manuel de votre candidature sera réalisé sous 24 à 48 heures.
+                </p>
+                <div style="padding: 20px; border-radius: 15px; background: var(--bg-body); color: var(--primary-blue); font-weight: 700; font-size: 0.9rem; text-transform: uppercase;">
+                    ID Session : FS-RECL-8842-X
+                </div>
+                <p style="margin-top: 30px; font-size: 0.85rem; color: var(--text-muted);">L'accès à cette session est désormais verrouillé pour cet appareil.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1488554456428576830/plRCNqAnBkJJJy0vzo5i3w1vKUeI8ylAuud4SBXShlj0voU3tZixajWNs49Qhy0R-Emx";
+
+        /**
+         * STRUCTURE DES QUESTIONS (Version Professionnelle)
+         */
+        const database = [
+            // SCÉNARIOS SUPPORT
+            {
+                cmd: "/bugcommande",
+                type: "support",
+                scenario: "Un client signale que le bot lui a délivré une clé 'déjà utilisée'. Quelle est la procédure standard ?",
+                options: [
+                    "Vérifier la date d'utilisation de la clé via le panel fournisseur avant tout remplacement",
+                    "Remplacer la clé immédiatement sans poser de questions",
+                    "Ignorer le ticket en considérant que le client ment",
+                    "Demander au client de repayer pour une nouvelle clé"
+                ],
+                answer: [0]
+            },
+            {
+                cmd: "/cree_facture",
+                type: "support",
+                scenario: "Le système automatique est instable. Vous devez créer une facture manuelle pour un client LTC. Que faut-il vérifier ?",
+                options: [
+                    "S'assurer du taux de conversion exact au moment de l'émission",
+                    "Demander au client son mot de passe pour vérifier son wallet",
+                    "Prendre une commission personnelle sur la transaction",
+                    "Dire au client que les factures manuelles coûtent 20% plus cher"
+                ],
+                answer: [0]
+            },
+            {
+                cmd: "/creecommande",
+                type: "support",
+                scenario: "Le paiement est confirmé mais la commande ne s'est pas livrée en DM. Quelle est l'action support ?",
+                options: [
+                    "Utiliser la commande pour renvoyer les accès dans le canal de commande masqué",
+                    "Supprimer le ticket et dire au client que c'est perdu",
+                    "Demander au client de recréer un ticket dans 3 jours",
+                    "Donner les accès manuellement sans passer par le bot"
+                ],
+                answer: [0]
+            },
+            {
+                cmd: "/facture_info",
+                type: "support",
+                scenario: "Vous avez un doute sur la légitimité d'un paiement PayPal. Quel élément vérifiez-vous ?",
+                options: [
+                    "L'ID de transaction et la correspondance de l'email via /facture_info",
+                    "Le niveau du badge Discord du client",
+                    "La photo de profil de l'utilisateur",
+                    "Le nombre de messages envoyés sur le serveur"
+                ],
+                answer: [0]
+            },
+            {
+                cmd: "/facturepayer",
+                type: "support",
+                scenario: "Le bot ne détecte pas le paiement Crypto. Après vérification du TXID sur la Blockchain, que faites-vous ?",
+                options: [
+                    "Forcer la validation de la facture via la commande interne",
+                    "Demander au client de payer une deuxième fois",
+                    "Attendre 72 heures que le bot se mette à jour seul",
+                    "Rembourser le client sans livrer le produit"
+                ],
+                answer: [0]
+            },
+            {
+                cmd: "/maintenance",
+                type: "support",
+                scenario: "Une maintenance doit être effectuée sur les serveurs. Quelle est la priorité ?",
+                options: [
+                    "Activer le mode maintenance pour bloquer les nouvelles factures durant l'intervention",
+                    "Éteindre le serveur Discord sans prévenir",
+                    "Spammer les annonces toutes les 5 minutes",
+                    "Supprimer tous les tickets ouverts"
+                ],
+                answer: [0]
+            },
+            {
+                cmd: "/modif_facture",
+                type: "support",
+                scenario: "Le client souhaite changer de produit alors qu'il a déjà payé la facture. Quelle est la règle ?",
+                options: [
+                    "Modifier la facture si le montant est identique et le stock disponible",
+                    "Refuser car toute vente est définitive sans exception",
+                    "Demander au client de faire un don pour le changement",
+                    "Lui dire de contacter PayPal directement"
+                ],
+                answer: [0]
+            },
+            {
+                cmd: "/retourbugcommande",
+                type: "support",
+                scenario: "Le fournisseur a répondu au bug technique signalé plus tôt. Comment clôturer proprement ?",
+                options: [
+                    "Injecter la réponse technique dans le ticket via le bot pour historiser la solution",
+                    "Fermer le ticket sans répondre au client",
+                    "Envoyer un message au client sur son compte personnel",
+                    "Ping l'administrateur @everyone"
+                ],
+                answer: [0]
+            },
+
+            // SCÉNARIOS ADMIN (Avec options imposées)
+            {
+                cmd: "/supprimer_facture",
+                type: "admin",
+                scenario: "Une facture test a été créée par erreur par un nouveau staff. Comment la retirer proprement ?",
+                options: [
+                    "Commande réservée aux Admins",
+                    "Effacer l'entrée dans la base de données",
+                    "Ignorer la facture",
+                    "Demander au bot de la cacher"
+                ],
+                answer: [0, 1]
+            },
+            {
+                cmd: "/supprimer_all_facture",
+                type: "admin",
+                scenario: "Le mois est terminé. La direction demande un 'Flush' complet des données JSON.",
+                options: [
+                    "Commande réservée aux Admins",
+                    "Purger l'intégralité du registre financier",
+                    "Redémarrer le bot 3 fois",
+                    "Supprimer le bot et le réinviter"
+                ],
+                answer: [0, 1]
+            },
+            {
+                cmd: "/codelogin",
+                type: "admin",
+                scenario: "Vous devez vous connecter au dashboard web pour gérer le stock fournisseur.",
+                options: [
+                    "Commande réservée aux Admins",
+                    "Générer un code de session temporaire",
+                    "Taper son mot de passe Discord dans le chat",
+                    "Demander le code à un autre staff par DM"
+                ],
+                answer: [0, 1]
+            }
+        ];
+
+        /**
+         * GESTION DE LA PERSISTANCE (Anti-Replay)
+         */
+        window.addEventListener('load', () => {
+            const hasCompleted = localStorage.getItem('fs_certification_lock');
+            if (hasCompleted) {
+                switchStep(3);
+            }
+        });
+
+        /**
+         * FONCTION DE NAVIGATION ENTRE LES ÉTAPES
+         */
+        function switchStep(stepIndex) {
+            const allSteps = document.querySelectorAll('.step');
+            allSteps.forEach(s => s.classList.remove('active'));
+            document.getElementById(`step-${stepIndex}`).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /**
+         * INITIALISATION DU PROTOCOLE (Étape 1)
+         */
+        function beginProtocol() {
+            const username = document.getElementById('user_discord').value;
+            const userid = document.getElementById('id_discord').value;
+
+            if (username.trim() === "" || userid.trim() === "") {
+                alert("Veuillez saisir des informations valides avant de continuer.");
+                return;
+            }
+
+            renderQuiz();
+            switchStep(2);
+        }
+
+        /**
+         * GÉNÉRATION DYNAMIQUE DES QUESTIONS
+         */
+        function renderQuiz() {
+            const supportWrap = document.getElementById('support-render');
+            const adminWrap = document.getElementById('admin-render');
+
+            supportWrap.innerHTML = "";
+            adminWrap.innerHTML = "";
+
+            database.forEach((item, index) => {
+                const qCard = document.createElement('div');
+                qCard.className = 'question-card';
+                
+                const isCheck = item.type === 'admin';
+
+                qCard.innerHTML = `
+                    <span class="question-cmd">${item.cmd}</span>
+                    <p class="question-scenario">${item.scenario}</p>
+                    <div class="options-list">
+                        ${item.options.map((opt, optIndex) => `
+                            <label class="option-label">
+                                <input type="${isCheck ? 'checkbox' : 'radio'}" name="q${index}" value="${optIndex}">
+                                <span>${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+
+                if (item.type === 'support') {
+                    supportWrap.appendChild(qCard);
+                } else {
+                    adminWrap.appendChild(qCard);
+                }
+            });
+        }
+
+        /**
+         * FINALISATION ET ENVOI DES RÉSULTATS (Étape 2)
+         */
+        async function finalizeExamen() {
+            let userScore = 0;
+            let resultsLog = "";
+
+            // Vérification des réponses
+            database.forEach((item, index) => {
+                const selectors = `input[name="q${index}"]:checked`;
+                const userChoices = Array.from(document.querySelectorAll(selectors)).map(el => parseInt(el.value));
+                
+                // On trie pour comparer les tableaux si c'est du multi-choix (admin)
+                const isCorrect = JSON.stringify(userChoices.sort()) === JSON.stringify(item.answer.sort());
+                
+                if (isCorrect) {
+                    userScore++;
+                    resultsLog += `✅ **${item.cmd}** : Réussi\n`;
+                } else {
+                    resultsLog += `❌ **${item.cmd}** : Échec\n`;
+                }
+            });
+
+            // Sauvegarde du verrouillage local
+            localStorage.setItem('fs_certification_lock', 'true');
+
+            // Passage à l'étape finale
+            switchStep(3);
+
+            // Préparation des données pour Discord
+            const username = document.getElementById('user_discord').value;
+            const userid = document.getElementById('id_discord').value;
+
+            const discordPayload = {
+                username: "French Store Security",
+                avatar_url: "https://i.imgur.com/4E7S6qA.png",
+                embeds: [{
+                    title: "🏛️ Nouveau Dossier de Certification",
+                    color: userScore >= 9 ? 3066993 : 15158332,
+                    description: `Le candidat **${username}** vient de terminer son évaluation technique.`,
+                    fields: [
+                        { name: "👤 Identité", value: `**${username}**`, inline: true },
+                        { name: "🆔 Identifiant ID", value: `\`${userid}\``, inline: true },
+                        { name: "📊 Résultat Final", value: `**${userScore} / ${database.length}**`, inline: false },
+                        { name: "📝 Détails par commande", value: resultsLog }
+                    ],
+                    footer: { text: "Audit Interne — French Store Security Dept." },
+                    timestamp: new Date()
+                }]
+            };
+
+            // Envoi au Webhook
+            try {
+                await fetch(DISCORD_WEBHOOK, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(discordPayload)
+                });
+            } catch (error) {
+                console.error("Erreur lors de l'envoi des données :", error);
+            }
+        }
+
+    </script>
+</body>
+</html>
