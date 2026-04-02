@@ -1,527 +1,147 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebResto 2026 | La Plateforme Ultime de Gestion Restauration | Créé par French Store</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
-                    colors: {
-                        primary: '#0052FF',
-                        darkBg: '#08090B',
-                        cardBg: '#111318',
-                        accentBlue: '#00C2FF'
-                    }
-                }
-            }
-        }
-    </script>
-
+    <title>Maintenance Technique - Statut</title>
     <style>
-        body { background-color: #08090B; color: #E2E8F0; }
-        
-        /* Personnalisation de la barre de défilement */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #08090B; }
-        ::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #0052FF; }
-
-        .glass-nav {
-            background: rgba(8, 9, 11, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        :root {
+            --bg: #ffffff;
+            --text: #111827;
+            --accent: #2563eb; /* Un bleu "Confiance" */
+            --border: #e5e7eb;
         }
 
-        .hero-gradient {
-            background: radial-gradient(circle at 50% -20%, rgba(0, 82, 255, 0.15) 0%, transparent 70%);
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f9fafb;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
         }
 
-        .feature-card {
-            background: #111318;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
+        .card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            max-width: 480px;
+            width: 100%;
+            padding: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
-        .feature-card:hover {
-            border-color: rgba(0, 82, 255, 0.4);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        .status-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
         }
 
-        .glow-text {
-            text-shadow: 0 0 20px rgba(0, 82, 255, 0.5);
+        /* Le petit point qui clignote (très rassurant pour un client) */
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
         }
 
-        .status-dot {
-            width: 8px; height: 8px; border-radius: 50%; background: #10B981;
-            display: inline-block; margin-right: 8px;
-            box-shadow: 0 0 10px #10B981;
+        @keyframes blink {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
-        .tab-active { color: #0052FF; border-bottom: 2px solid #0052FF; }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
 
-        .dashboard-ui {
-            background: #0D0E12;
-            border: 4px solid #1F2937;
-            border-radius: 20px;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+        p {
+            color: #4b5563;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        /* Barre de progression subtile */
+        .progress-container {
+            background: #f3f4f6;
+            height: 6px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .progress-bar {
+            width: 75%;
+            height: 100%;
+            background: var(--accent);
+            border-radius: 10px;
+            animation: load 2s ease-out;
+        }
+
+        @keyframes load {
+            from { width: 0%; }
+            to { width: 75%; }
+        }
+
+        .date-info {
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .date-label { color: #6b7280; }
+        .date-value { font-weight: 600; }
+
+        .note {
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: #9ca3af;
+            font-style: italic;
         }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <nav class="glass-nav fixed w-full z-[100] transition-all duration-300">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2 group cursor-pointer">
-                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center transition-transform group-hover:rotate-12">
-                    <span class="font-black text-white text-xl uppercase">W</span>
-                </div>
-                <span class="text-2xl font-extrabold tracking-tighter text-white">WebResto</span>
-            </div>
-
-            <div class="hidden lg:flex items-center space-x-10 text-sm font-bold uppercase tracking-widest text-gray-400">
-                <a href="#logiciel" class="hover:text-primary transition-colors">Le Logiciel</a>
-                <a href="#fonctions" class="hover:text-primary transition-colors">Fonctionnalités</a>
-                <a href="#equipes" class="hover:text-primary transition-colors">Équipes</a>
-                <a href="#securite" class="hover:text-primary transition-colors">Sécurité</a>
-            </div>
-
-            <div class="flex items-center space-x-6">
-                <a href="#" class="hidden sm:block text-sm font-bold hover:text-primary transition">Se connecter</a>
-                <button class="bg-primary hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold text-sm shadow-lg shadow-blue-900/20 transition-all active:scale-95 uppercase tracking-tighter">
-                    Demander une démo
-                </button>
-            </div>
+    <div class="card">
+        <div class="status-header">
+            <span class="dot"></span> Mise à jour système
         </div>
-    </nav>
+        
+        <h1>Maintenance programmée</h1>
+        
+        <p>
+            Nous effectuons actuellement des optimisations sur le serveur pour garantir la stabilité du site. Cette opération est temporaire.
+        </p>
 
-    <section class="relative hero-gradient pt-40 pb-32 px-6 overflow-hidden">
-        <div class="container mx-auto text-center relative z-10">
-            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 anim-hero">
-                <span class="status-dot animate-pulse"></span>
-                <span class="text-xs font-bold uppercase tracking-widest text-blue-400">Édition 2026 - Déployée par French Store</span>
-            </div>
-            
-            <h1 class="text-5xl md:text-8xl font-black tracking-tight leading-[0.9] text-white mb-8 anim-hero">
-                L'infrastructure SaaS <br> des <span class="text-primary glow-text">Grands Restaurants.</span>
-            </h1>
-
-            <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-12 font-medium leading-relaxed anim-hero">
-                WebResto centralise la complexité opérationnelle de vos établissements. 
-                RH, planning intelligent, conformité HACCP et pilotage multi-sites 
-                au sein d'une interface unique, ultra-rapide et sécurisée.
-            </p>
-
-            <div class="flex flex-wrap justify-center gap-6 anim-hero">
-                <button class="bg-white text-black px-12 py-5 rounded-2xl font-black text-lg hover:bg-primary hover:text-white transition-all duration-300">
-                    Démarrer l'essai gratuit
-                </button>
-                <button class="bg-white/5 border border-white/10 text-white px-12 py-5 rounded-2xl font-black text-lg hover:bg-white/10 transition-all">
-                    Voir les fonctionnalités
-                </button>
-            </div>
-
-            <div class="mt-24 max-w-6xl mx-auto dashboard-ui p-2 anim-dashboard">
-                <div class="bg-cardBg rounded-xl overflow-hidden aspect-[16/9] relative">
-                    <div class="absolute left-0 top-0 bottom-0 w-20 bg-darkBg border-r border-white/5 flex flex-col items-center py-8 space-y-8">
-                        <div class="w-10 h-10 bg-white/5 rounded-lg"></div>
-                        <div class="w-10 h-10 bg-white/5 rounded-lg"></div>
-                        <div class="w-10 h-10 bg-white/5 rounded-lg"></div>
-                        <div class="w-10 h-10 bg-white/5 rounded-lg"></div>
-                    </div>
-                    <div class="ml-20 p-8 text-left">
-                        <div class="flex justify-between items-center mb-12">
-                            <div class="h-8 w-48 bg-white/5 rounded-md"></div>
-                            <div class="h-10 w-10 bg-primary rounded-full"></div>
-                        </div>
-                        <div class="grid grid-cols-3 gap-6">
-                            <div class="h-40 bg-white/5 rounded-2xl border border-white/5 p-6">
-                                <div class="h-4 w-20 bg-blue-500/20 rounded-full mb-4"></div>
-                                <div class="h-8 w-32 bg-white/10 rounded-md"></div>
-                            </div>
-                            <div class="h-40 bg-white/5 rounded-2xl border border-white/5 p-6">
-                                <div class="h-4 w-20 bg-green-500/20 rounded-full mb-4"></div>
-                                <div class="h-8 w-32 bg-white/10 rounded-md"></div>
-                            </div>
-                            <div class="h-40 bg-white/5 rounded-2xl border border-white/5 p-6">
-                                <div class="h-4 w-20 bg-purple-500/20 rounded-full mb-4"></div>
-                                <div class="h-8 w-32 bg-white/10 rounded-md"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-20 border-y border-white/5">
-        <div class="container mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-12">
-            <div class="text-center anim-stat">
-                <h3 class="text-5xl font-black text-white mb-2 tracking-tighter">1200+</h3>
-                <p class="text-sm font-bold uppercase tracking-widest text-gray-500 italic">Établissements actifs</p>
-            </div>
-            <div class="text-center anim-stat">
-                <h3 class="text-5xl font-black text-primary mb-2 tracking-tighter">-30h</h3>
-                <p class="text-sm font-bold uppercase tracking-widest text-gray-500 italic">Administratif / mois</p>
-            </div>
-            <div class="text-center anim-stat">
-                <h3 class="text-5xl font-black text-white mb-2 tracking-tighter">100%</h3>
-                <p class="text-sm font-bold uppercase tracking-widest text-gray-500 italic">Conformité HACCP</p>
-            </div>
-            <div class="text-center anim-stat">
-                <h3 class="text-5xl font-black text-primary mb-2 tracking-tighter">0.1s</h3>
-                <p class="text-sm font-bold uppercase tracking-widest text-gray-500 italic">Temps de réponse serveur</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="logiciel" class="py-32 px-6">
-        <div class="container mx-auto">
-            <div class="flex flex-col lg:flex-row gap-20 items-center">
-                <div class="lg:w-1/2 anim-fade-left">
-                    <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-8 tracking-tight font-title">
-                        Un pilotage centralisé <br> pour le <span class="text-primary">Multi-sites.</span>
-                    </h2>
-                    <p class="text-lg text-gray-400 mb-8 leading-relaxed">
-                        WebResto a été conçu spécifiquement pour les chaînes et franchises de restauration. 
-                        Oubliez les fichiers Excel éparpillés et les processus manuels.
-                    </p>
-                    <ul class="space-y-4">
-                        <li class="flex items-center space-x-4 text-white font-semibold">
-                            <span class="w-6 h-6 bg-primary/20 text-primary rounded-full flex items-center justify-center text-xs">✓</span>
-                            <span>Accès multi-plateformes (Web, Tablette, Mobile)</span>
-                        </li>
-                        <li class="flex items-center space-x-4 text-white font-semibold">
-                            <span class="w-6 h-6 bg-primary/20 text-primary rounded-full flex items-center justify-center text-xs">✓</span>
-                            <span>Synchronisation en temps réel entre établissements</span>
-                        </li>
-                        <li class="flex items-center space-x-4 text-white font-semibold">
-                            <span class="w-6 h-6 bg-primary/20 text-primary rounded-full flex items-center justify-center text-xs">✓</span>
-                            <span>Interface personnalisable selon vos besoins métiers</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="lg:w-1/2 anim-fade-right">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="feature-card p-8 rounded-3xl">
-                            <h4 class="text-white font-bold mb-2">Manager</h4>
-                            <p class="text-sm text-gray-500 italic">Vision stratégique et KPI</p>
-                        </div>
-                        <div class="feature-card p-8 rounded-3xl">
-                            <h4 class="text-white font-bold mb-2">Directeur</h4>
-                            <p class="text-sm text-gray-500 italic">Validation opérationnelle</p>
-                        </div>
-                        <div class="feature-card p-8 rounded-3xl">
-                            <h4 class="text-white font-bold mb-2">Serveur</h4>
-                            <p class="text-sm text-gray-500 italic">Planning et pointage</p>
-                        </div>
-                        <div class="feature-card p-8 rounded-3xl">
-                            <h4 class="text-white font-bold mb-2">Cuisinier</h4>
-                            <p class="text-sm text-gray-500 italic">Traçabilité et HACCP</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="fonctions" class="py-32 bg-white/[0.01]">
-        <div class="container mx-auto px-6 text-center mb-20">
-            <h2 class="text-4xl md:text-6xl font-black text-white mb-6">Modules Professionnels.</h2>
-            <p class="text-gray-500 font-medium">Tout ce qu'un restaurateur moderne exige en 2026.</p>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
         </div>
 
-        <div class="container mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <div class="feature-card p-10 rounded-[32px] anim-reveal">
-                <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-8">
-                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                </div>
-                <h3 class="text-2xl font-black text-white mb-4">Ressources Humaines</h3>
-                <ul class="text-gray-500 space-y-3 text-sm font-medium">
-                    <li>• Fiches salariés complètes</li>
-                    <li>• Archivage contrats CDI/CDD</li>
-                    <li>• Gestion des compétences</li>
-                    <li>• Suivi du personnel multi-sites</li>
-                </ul>
-            </div>
-
-            <div class="feature-card p-10 rounded-[32px] anim-reveal">
-                <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-8 text-blue-500">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                </div>
-                <h3 class="text-2xl font-black text-white mb-4">Planning Intelligent</h3>
-                <ul class="text-gray-500 space-y-3 text-sm font-medium">
-                    <li>• Interface Drag & Drop intuitive</li>
-                    <li>• Gestion des congés payés</li>
-                    <li>• Suivi des absences & maladies</li>
-                    <li>• Gestion des indisponibilités</li>
-                </ul>
-            </div>
-
-            <div class="feature-card p-10 rounded-[32px] anim-reveal">
-                <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center mb-8 text-green-500">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </div>
-                <h3 class="text-2xl font-black text-white mb-4">Pointage & Heures</h3>
-                <ul class="text-gray-500 space-y-3 text-sm font-medium">
-                    <li>• Suivi des heures travaillées</li>
-                    <li>• Historique complet des pointages</li>
-                    <li>• Alertes retards & heures supp</li>
-                    <li>• Synchronisation avec la paie</li>
-                </ul>
-            </div>
-
-            <div class="feature-card p-10 rounded-[32px] anim-reveal">
-                <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-8 text-purple-500">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                </div>
-                <h3 class="text-2xl font-black text-white mb-4">Gestion de Paie</h3>
-                <ul class="text-gray-500 space-y-3 text-sm font-medium">
-                    <li>• Préparation fiches de paie</li>
-                    <li>• Export PDF & Impression</li>
-                    <li>• Liaison comptable directe</li>
-                    <li>• Archivage légal sécurisé</li>
-                </ul>
-            </div>
-
-            <div class="feature-card p-10 rounded-[32px] anim-reveal">
-                <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center mb-8 text-red-500">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                </div>
-                <h3 class="text-2xl font-black text-white mb-4">HACCP Digital</h3>
-                <ul class="text-gray-500 space-y-3 text-sm font-medium">
-                    <li>• Traçabilité alimentaire complète</li>
-                    <li>• Suivi automatique des DLC</li>
-                    <li>• Relevés de température digitaux</li>
-                    <li>• Rapports d'hygiène conformes</li>
-                </ul>
-            </div>
-
-            <div class="feature-card p-10 rounded-[32px] anim-reveal">
-                <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center mb-8 text-orange-500">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                </div>
-                <h3 class="text-2xl font-black text-white mb-4">Alertes 24/7</h3>
-                <ul class="text-gray-500 space-y-3 text-sm font-medium">
-                    <li>• Notifications Email & Push App</li>
-                    <li>• Alertes DLC imminentes</li>
-                    <li>• Rappels de pointage manqués</li>
-                    <li>• Journal des actions critiques</li>
-                </ul>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="py-32 px-6 overflow-hidden">
-        <div class="container mx-auto">
-            <div class="text-center mb-20 anim-reveal">
-                <h2 class="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight uppercase font-title">Expérience Utilisateur.</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto italic">Un design moderne conçu pour la rapidité opérationnelle.</p>
-            </div>
-
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
-                <div class="anim-fade-left">
-                    <div class="space-y-12">
-                        <div class="flex items-start space-x-6">
-                            <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-primary font-bold">01</div>
-                            <div>
-                                <h4 class="text-xl font-bold text-white mb-2 uppercase">Tableau de Bord Personnalisable</h4>
-                                <p class="text-gray-500">Ajustez vos widgets selon vos priorités. Chiffres du jour, plannings à valider ou alertes HACCP.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-6">
-                            <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-primary font-bold">02</div>
-                            <div>
-                                <h4 class="text-xl font-bold text-white mb-2 uppercase">Mode Jour / Nuit Natif</h4>
-                                <p class="text-gray-500">Adaptez le confort visuel de vos équipes selon l'environnement de travail (Cuisine ou Bureau).</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-6">
-                            <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-primary font-bold">03</div>
-                            <div>
-                                <h4 class="text-xl font-bold text-white mb-2 uppercase">Navigation Intuitive</h4>
-                                <p class="text-gray-500">Zéro formation requise. Vos collaborateurs prennent WebResto en main en moins de 5 minutes.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative anim-fade-right">
-                    <div class="absolute -inset-4 bg-primary/20 blur-[100px] rounded-full"></div>
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" class="rounded-[40px] relative z-10 border border-white/10 shadow-2xl">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="securite" class="py-32 bg-primary/5 px-6 border-y border-primary/10">
-        <div class="container mx-auto">
-            <div class="max-w-4xl mx-auto text-center mb-20 anim-reveal">
-                <h2 class="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter uppercase font-title italic underline decoration-primary decoration-8">Sécurité 2026.</h2>
-                <p class="text-xl text-gray-400 font-medium">Votre sérénité repose sur une infrastructure inviolable et une conformité européenne stricte.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 anim-reveal">
-                <div class="glass-nav p-8 rounded-3xl border border-white/5 text-center">
-                    <div class="text-blue-400 font-black mb-4 uppercase tracking-widest text-xs">Données</div>
-                    <p class="text-sm text-gray-400 italic font-bold leading-relaxed">Cryptage AES-256 de bout en bout pour toutes vos données sensibles.</p>
-                </div>
-                <div class="glass-nav p-8 rounded-3xl border border-white/5 text-center">
-                    <div class="text-blue-400 font-black mb-4 uppercase tracking-widest text-xs">Backup</div>
-                    <p class="text-sm text-gray-400 italic font-bold leading-relaxed">Sauvegardes automatiques toutes les 15 minutes sur 3 serveurs isolés.</p>
-                </div>
-                <div class="glass-nav p-8 rounded-3xl border border-white/5 text-center">
-                    <div class="text-blue-400 font-black mb-4 uppercase tracking-widest text-xs">Accès</div>
-                    <p class="text-sm text-gray-400 italic font-bold leading-relaxed">Contrôle strict des rôles. Historique complet des actions (Audit Log).</p>
-                </div>
-                <div class="glass-nav p-8 rounded-3xl border border-white/5 text-center">
-                    <div class="text-blue-400 font-black mb-4 uppercase tracking-widest text-xs">Normes</div>
-                    <p class="text-sm text-gray-400 italic font-bold leading-relaxed">Certification Européenne de sécurité logicielle et conformité RGPD.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-32 px-6">
-        <div class="container mx-auto max-w-3xl">
-            <h2 class="text-4xl font-black text-white mb-16 text-center tracking-tighter font-title uppercase">Questions Fréquentes.</h2>
-            <div class="space-y-6">
-                <div class="glass-nav p-8 rounded-2xl border border-white/5 anim-reveal">
-                    <h4 class="font-bold text-white mb-4 uppercase text-sm tracking-widest">Le logiciel est-il difficile à installer ?</h4>
-                    <p class="text-gray-500 text-sm italic font-medium leading-relaxed">Absolument pas. WebResto est un SaaS en ligne. Aucune installation physique. Une connexion internet suffit pour piloter vos établissements.</p>
-                </div>
-                <div class="glass-nav p-8 rounded-2xl border border-white/5 anim-reveal">
-                    <h4 class="font-bold text-white mb-4 uppercase text-sm tracking-widest">Puis-je exporter mes données vers ma comptabilité ?</h4>
-                    <p class="text-gray-500 text-sm italic font-medium leading-relaxed">Oui, nos modules de paie et de gestion sont compatibles avec les principaux logiciels comptables européens (Exports PDF, Excel, API).</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-32 px-6 bg-primary">
-        <div class="container mx-auto text-center">
-            <h2 class="text-4xl md:text-7xl font-black text-white mb-12 tracking-tight uppercase font-title leading-none">
-                Transformez votre <br> gestion dès aujourd'hui.
-            </h2>
-            <div class="flex flex-wrap justify-center gap-6">
-                <button class="bg-black text-white px-12 py-6 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-2xl">
-                    DEMANDER UNE DÉMO
-                </button>
-                <button class="bg-white text-primary px-12 py-6 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-2xl">
-                    CRÉER UN COMPTE
-                </button>
-            </div>
-            <p class="mt-12 text-blue-900 font-black uppercase tracking-[0.4em] text-xs">Pas de carte bancaire requise • Test 14 jours</p>
-        </div>
-    </section>
-
-    <footer class="py-20 px-6 border-t border-white/5 bg-darkBg relative overflow-hidden">
-        <div class="container mx-auto grid md:grid-cols-4 gap-16 mb-20">
-            <div class="col-span-1 md:col-span-2">
-                <div class="flex items-center space-x-2 mb-8">
-                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-black text-white">W</div>
-                    <span class="text-xl font-black text-white uppercase tracking-tighter">WebResto</span>
-                </div>
-                <p class="text-gray-500 max-w-sm mb-8 italic font-medium">
-                    Leader européen des solutions de gestion digitale pour la restauration professionnelle multi-sites et franchises.
-                </p>
-                <div class="flex space-x-4">
-                    <div class="w-10 h-10 bg-white/5 rounded-full hover:bg-primary transition cursor-pointer"></div>
-                    <div class="w-10 h-10 bg-white/5 rounded-full hover:bg-primary transition cursor-pointer"></div>
-                    <div class="w-10 h-10 bg-white/5 rounded-full hover:bg-primary transition cursor-pointer"></div>
-                </div>
-            </div>
-
-            <div>
-                <h5 class="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Navigation</h5>
-                <ul class="space-y-4 text-sm text-gray-500 font-bold uppercase tracking-widest">
-                    <li><a href="#" class="hover:text-primary transition">Le Logiciel</a></li>
-                    <li><a href="#" class="hover:text-primary transition">Fonctionnalités</a></li>
-                    <li><a href="#" class="hover:text-primary transition">Multi-sites</a></li>
-                    <li><a href="#" class="hover:text-primary transition">Sécurité</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h5 class="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">French Store</h5>
-                <ul class="space-y-4 text-sm text-gray-500 font-bold leading-relaxed">
-                    <li>Développé par NyxX</li>
-                    <li>France</li>
-                    <li><a href="#" class="hover:text-white transition">Mentions Légales</a></li>
-                    <li><a href="#" class="hover:text-white transition">Politique de Confidentialité</a></li>
-                </ul>
-            </div>
+        <div class="date-info">
+            <span class="date-label">Rétablissement prévu :</span>
+            <span class="date-value">03 Avril 2026</span>
         </div>
 
-        <div class="container mx-auto pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-xs text-gray-600 font-bold uppercase tracking-widest">© 2026 WebResto SaaS. Tous droits réservés.</p>
-            <div class="flex items-center gap-2 group">
-                <span class="text-xs text-gray-600 italic font-medium">Expérience digitale et </span>
-                <span class="text-sm font-black text-white uppercase tracking-tighter transition group-hover:text-primary">Site créé par French Store</span>
-            </div>
+        <div class="note">
+            Note : Vos données sont en sécurité, aucun impact sur la base de données.
         </div>
-    </section>
-
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Animations Hero
-        gsap.from(".anim-hero", {
-            y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power4.out"
-        });
-
-        gsap.from(".anim-dashboard", {
-            scale: 0.9, opacity: 0, duration: 1.5, delay: 0.8, ease: "expo.out"
-        });
-
-        // Stats
-        gsap.from(".anim-stat", {
-            y: 30, opacity: 0, duration: 0.8, stagger: 0.1,
-            scrollTrigger: { trigger: ".anim-stat", start: "top 90%" }
-        });
-
-        // Révélation des blocs (ScrollTrigger)
-        const revealElements = gsap.utils.toArray('.anim-reveal');
-        revealElements.forEach(el => {
-            gsap.from(el, {
-                y: 40, opacity: 0, duration: 1,
-                scrollTrigger: { trigger: el, start: "top 85%" }
-            });
-        });
-
-        // Fade Left/Right
-        gsap.from(".anim-fade-left", {
-            x: -50, opacity: 0, duration: 1.2,
-            scrollTrigger: { trigger: ".anim-fade-left", start: "top 80%" }
-        });
-
-        gsap.from(".anim-fade-right", {
-            x: 50, opacity: 0, duration: 1.2,
-            scrollTrigger: { trigger: ".anim-fade-right", start: "top 80%" }
-        });
-
-        // Animation simple du header lors du scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('py-2');
-                nav.style.background = 'rgba(8, 9, 11, 0.95)';
-            } else {
-                nav.classList.remove('py-2');
-                nav.style.background = 'rgba(8, 9, 11, 0.8)';
-            }
-        });
-    </script>
+    </div>
 
 </body>
 </html>
