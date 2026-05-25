@@ -3,148 +3,1399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conformité Requise | FRENCHSTORE</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Campus Rosa Parks - L'excellence académique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap">
     
     <style>
+        /* ==========================================================================
+           1. VARIABLES ET CONFIGURATION DE BASE
+           ========================================================================== */
         :root {
-            --primary: #2d3436;
-            --accent: #0984e3;
-            --warning-red: #d63031;
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --glass: rgba(255, 255, 255, 0.8);
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #e0e7ff;
+            --accent: #06b6d4;
+            --accent-hover: #0891b2;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+            --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.05);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Quicksand', sans-serif;
-            background: var(--bg-gradient);
-            color: var(--primary);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .main-card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 30px;
-            padding: 50px;
-            max-width: 800px;
+        .container {
             width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        .header-status {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--warning-red);
-            color: white;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        section {
+            padding: 100px 0;
+            position: relative;
         }
 
-        h1 {
-            font-weight: 700;
-            font-size: 32px;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            color: #000;
+        span.accent-text {
+            color: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .legal-notice {
-            background: rgba(255, 255, 255, 0.5);
-            border-left: 4px solid var(--accent);
-            padding: 25px;
-            margin: 30px 0;
-            text-align: left;
-            border-radius: 0 15px 15px 0;
-        }
-
-        .legal-notice p {
-            font-size: 16px;
-            line-height: 1.7;
-            color: #444;
-            font-weight: 500;
-        }
-
-        .legal-notice strong {
-            color: var(--accent);
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .contact-info {
-            font-size: 15px;
-            color: #636e72;
-            margin-top: 20px;
-        }
-
-        footer {
-            margin-top: 40px;
-            font-weight: 500;
-            color: #2d3436;
-        }
-
-        footer strong {
-            color: var(--accent);
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(40px); }
+        /* ==========================================================================
+           2. ANIMATIONS CSS HAUTE PERFORMANCE
+           ========================================================================== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            .main-card { padding: 30px 20px; }
-            h1 { font-size: 24px; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(79, 70, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .animate-fade-in { animation: fadeInUp 0.8s var(--transition) forwards; }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        /* ==========================================================================
+           3. BOUTONS ET COMPOSANTS INTERACTIFS
+           ========================================================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--text-main);
+            border: 1px border var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: white;
+            animation: pulseGlow 2s infinite;
+        }
+
+        .btn-accent:hover {
+            transform: scale(1.03);
+        }
+
+        .tag-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        /* ==========================================================================
+           4. EN-TÊTE ET NAVIGATION DYNAMIQUE
+           ========================================================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-b: 1px border rgba(226, 232, 240, 0.5);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            height: 70px;
+            box-shadow: var(--shadow-sm);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .nav-wrapper {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo i {
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 6px 0;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* ==========================================================================
+           5. HERO SECTION
+           ========================================================================== */
+        .hero-section {
+            padding-top: 180px;
+            padding-bottom: 80px;
+            background: radial-gradient(circle at 90% 10%, rgba(224, 231, 255, 0.5) 0%, rgba(255, 255, 255, 0) 60%);
+        }
+
+        .hero-container {
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-container h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+
+        @media (max-width: 768px) {
+            .hero-container h1 { font-size: 2.5rem; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 40px auto;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 60px;
+        }
+
+        .recruitment-card {
+            background-color: var(--bg-card);
+            border: 1px border var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .recruitment-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(79, 70, 229, 0.3);
+        }
+
+        .recruitment-info-block {
+            max-width: 70%;
+        }
+
+        .badge-new {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background-color: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .recruitment-card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .recruitment-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .recruitment-card { flex-direction: column; gap: 24px; text-align: center; }
+            .recruitment-info-block { max-width: 100%; }
+        }
+
+        /* ==========================================================================
+           6. NOUVEAU MODULE COMPLET DE RECRUTEMENT INTERACTIF
+           ========================================================================== */
+        .recruitment-hub {
+            background-color: #ffffff;
+            border-y: 1px border var(--border-color);
+        }
+
+        .operation-note {
+            background-color: #fffbeb;
+            border-left: 4px solid var(--warning);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .operation-note i {
+            color: var(--warning);
+            font-size: 1.3rem;
+            margin-top: 2px;
+        }
+
+        .operation-note p {
+            color: #78350f;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .hub-category-card {
+            background-color: var(--bg-main);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .hub-category-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .hub-category-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.35rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hub-category-card h3 i { color: var(--primary); }
+
+        .hub-category-card .card-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .positions-list {
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Personnalisation de l'ascenseur de défilement */
+        .positions-list::-webkit-scrollbar { width: 6px; }
+        .positions-list::-webkit-scrollbar-track { background: transparent; }
+        .positions-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        .position-row {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .position-row:hover {
+            border-color: #cbd5e1;
+            transform: translateX(3px);
+        }
+
+        .position-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .position-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+            margin-top: 4px;
+        }
+
+        .status-open { background-color: #d1fae5; color: #065f46; }
+        .status-waiting { background-color: #fef3c7; color: #92400e; }
+
+        .btn-apply-sm {
+            padding: 8px 14px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-apply-sm:hover {
+            background-color: var(--primary-hover);
+            transform: scale(1.05);
+        }
+
+        /* FORMULAIRE DE RECRUTEMENT EMBEDDED */
+        .application-form-panel {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            max-width: 750px;
+            margin: 50px auto 0 auto;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .form-heading {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .form-heading h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; }
+        .form-heading p { color: var(--primary); font-weight: 600; font-size: 0.9rem; margin-top: 4px; }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) { .form-grid-2 { grid-template-columns: 1fr; } }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            font-family: inherit;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e1;
+            border-radius: var(--radius-md);
+            outline: none;
+            transition: var(--transition);
+            background-color: #f8fafc;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--primary);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .checkbox-agreement-card {
+            background-color: #f1f5f9;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .checkbox-agreement-card input[type="checkbox"] {
+            margin-top: 4px;
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-agreement-card label {
+            font-size: 0.85rem;
+            color: #475569;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .form-status-alert {
+            padding: 14px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+        .alert-success { background-color: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+        .alert-error { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+        /* ==========================================================================
+           7. BENTO STRUCTURE (L'UNIVERS EN CHIFFRES)
+           ========================================================================== */
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px auto;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.4rem;
+            letter-spacing: -0.02em;
+        }
+
+        .bento-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .bento-container { grid-template-columns: 1fr; }
+        }
+
+        .bento-box {
+            background-color: var(--bg-card);
+            border: 1px border var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .bento-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .bento-box h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+        }
+
+        .bento-box p { color: var(--text-muted); }
+
+        .large-span { display: flex; flex-direction: column; gap: 40px; }
+
+        .stat-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            border-t: 1px border var(--border-color);
+            padding-top: 30px;
+        }
+
+        .stat-element { text-align: center; }
+        .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 2.8rem; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+
+        .highlighted-box {
+            background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
+            color: white;
+            border: none;
+        }
+
+        .highlighted-box h3 { color: white; }
+        .highlighted-box p { color: #c7d2fe; }
+
+        /* ==========================================================================
+           8. SERVICES GRID (DIGITAL TOOLKIT)
+           ========================================================================== */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .tool-item {
+            background-color: var(--bg-card);
+            border: 1px border var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px 32px 32px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: var(--transition);
+        }
+
+        .tool-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(79, 70, 229, 0.2);
+        }
+
+        .status-ribbon {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .status-ribbon.maintenance { background-color: #ffedd5; color: #c2410c; }
+        .status-ribbon.online { background-color: #d1fae5; color: #065f46; }
+
+        .tool-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+
+        .tool-item:hover .tool-icon-wrapper {
+            background-color: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .tool-item h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; margin-bottom: 12px; }
+        .tool-item p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px; flex-grow: 1; }
+
+        /* ==========================================================================
+           9. TÉMOIGNAGES / FEEDBACK LAYOUT
+           ========================================================================== */
+        .testimonials-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .testimonial-block {
+            background-color: var(--bg-card);
+            border: 1px border var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .testimonial-block:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+        .quote-icon-container { color: #cbd5e1; font-size: 1.8rem; margin-bottom: 16px; }
+
+        .testimonial-text { color: #334155; font-size: 0.95rem; line-height: 1.6; font-style: italic; }
+
+        .profile-meta { margin-top: 24px; border-t: 1px border var(--border-color); padding-top: 16px; }
+        .profile-meta h4 { font-size: 1rem; font-weight: 700; color: var(--text-main); }
+        .profile-meta span { font-size: 0.8rem; color: var(--primary); font-weight: 600; }
+
+        .cta-feedback-block {
+            background-color: var(--primary-light);
+            border: 2px dashed rgba(79, 70, 229, 0.3);
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .plus-icon { font-size: 2.2rem; color: var(--primary); }
+
+        /* ==========================================================================
+           10. CATALOGUE ET ESPACES CONFIGURÉS
+           ========================================================================== */
+        .catalog-container {
+            background-color: #0f172a;
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .briefcase-icon { font-size: 3rem; color: var(--accent); margin-bottom: 20px; }
+        .catalog-container h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 12px; }
+        .catalog-container p { color: #94a3b8; max-width: 550px; margin: 0 auto 30px auto; }
+
+        .formation-tags-list { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .formation-pill { background-color: rgba(255, 255, 255, 0.08); border: 1px border rgba(255, 255, 255, 0.15); padding: 8px 18px; border-radius: 100px; font-size: 0.85rem; font-weight: 600; }
+
+        /* BANNIÈRE PARTENAIRE */
+        .partner-banner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+            background-color: white;
+            border: 1px border var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) { .partner-banner { grid-template-columns: 1fr; gap: 30px; } }
+
+        .partner-features-mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .partner-mini-card { background-color: var(--bg-main); border-radius: var(--radius-md); padding: 20px 10px; text-align: center; font-size: 0.8rem; font-weight: 700; display: flex; flex-direction: column; gap: 10px; }
+        .partner-mini-card i { font-size: 1.4rem; color: var(--primary); }
+
+        /* ==========================================================================
+           11. ACTUALITÉS & CHRONOLOGIE
+           ========================================================================== */
+        .news-wrapper-list { display: flex; flex-direction: column; gap: 16px; }
+
+        .news-row-item {
+            background-color: white;
+            border: 1px border var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .news-row-item:hover { transform: translateX(6px); border-color: var(--primary); }
+
+        .news-date-badge { display: flex; flex-direction: column; align-items: center; background-color: var(--bg-main); padding: 10px 16px; border-radius: 10px; min-width: 70px; }
+        .day-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--primary); }
+        .month-txt { font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted); }
+
+        .news-text-content { flex-grow: 1; margin-left: 30px; }
+        .news-text-content h4 { font-size: 1.1rem; margin-bottom: 4px; }
+        .news-text-content p { color: var(--text-muted); font-size: 0.9rem; }
+
+        .news-arrow-indicator { color: var(--text-muted); transition: var(--transition); }
+        .news-row-item:hover .news-arrow-indicator { color: var(--primary); transform: translateX(4px); }
+
+        /* BLOC DE FIN DE PAGE */
+        .final-cta-block {
+            background: linear-gradient(135deg, var(--primary) 0%, #312e81 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .final-cta-block h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; margin-bottom: 12px; }
+        .final-cta-block p { color: #c7d2fe; max-width: 600px; margin: 0 auto 32px auto; }
+
+        /* ==========================================================================
+           12. BAS DE PAGE (FOOTER)
+           ========================================================================== */
+        footer { background-color: #ffffff; border-t: 1px border var(--border-color); padding: 80px 0 30px 0; }
+        
+        .footer-grid-layout {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 768px) { .footer-grid-layout { grid-template-columns: 1fr; } }
+
+        .footer-about h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; margin-bottom: 16px; }
+        .footer-about p { color: var(--text-muted); font-size: 0.9rem; max-width: 300px; }
+
+        .footer-column h4 { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 20px; }
+
+        .footer-links-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links-list a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: var(--transition); }
+        .footer-links-list a:hover { color: var(--primary); }
+
+        .footer-modal-trigger-btn {
+            background: none; border: none; color: var(--text-muted); font-family: inherit; font-size: 0.9rem; text-align: left; cursor: pointer; transition: var(--transition);
+        }
+        .footer-modal-trigger-btn:hover { color: var(--primary); }
+
+        .contact-info-item { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px; }
+        .contact-info-item i { color: var(--primary); }
+
+        .footer-copyright-bar { border-t: 1px border var(--border-color); padding-top: 30px; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+
+        /* ==========================================================================
+           13. DIALOGUES ET MODALES HTML5 STRUCTURES
+           ========================================================================== */
+        dialog {
+            border: none;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            width: 100%;
+            margin: auto;
+            padding: 30px;
+            outline: none;
+        }
+
+        dialog::backdrop { background-color: rgba(15, 23, 42, 0.5); backdrop-filter: blur(8px); }
+
+        .modal-window-header { display: flex; align-items: center; justify-content: space-between; border-b: 1px border var(--border-color); padding-bottom: 16px; margin-bottom: 20px; }
+        .modal-window-header h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; }
+        .modal-close-icon-btn { background: none; border: none; font-size: 1.2rem; color: var(--text-muted); cursor: pointer; }
+
+        .legal-scrollbox { max-height: 250px; overflow-y: auto; border: 1px border var(--border-color); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px; font-size: 0.85rem; color: #475569; }
+        .legal-scrollbox h5 { font-size: 0.95rem; margin: 16px 0 6px 0; color: var(--text-main); }
+
+        .rgpd-checkbox-card { border: 1px border var(--border-color); border-radius: var(--radius-md); padding: 14px; margin-bottom: 14px; }
+        .rgpd-checkbox-card label { font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+
+        /* SYSTEME D'ALERTE GENERAL */
+        .custom-alert-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 2000; display: none; align-items: center; justify-content: center;
+        }
+
+        .custom-alert-box { background-color: white; border-radius: var(--radius-lg); padding: 40px; text-align: center; max-width: 400px; width: 90%; box-shadow: var(--shadow-lg); }
+        .custom-alert-box i { font-size: 3rem; color: var(--warning); margin-bottom: 16px; }
+        .custom-alert-box h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; margin-bottom: 8px; }
+        .custom-alert-box p { color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; }
     </style>
 </head>
 <body>
 
-    <div class="main-card">
-        <div class="header-status">Suspension de Service</div>
-        
-        <h1>Accès restreint pour non-conformité légale</h1>
-        
-        <p>Le déploiement de ce site est interrompu suite au non-respect des règles de transparence publicitaire en vigueur.</p>
 
-        <div class="legal-notice">
-            <strong>Rappel de la Loi :</strong>
-            <p>
-                « L'article 20 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique dispose par ailleurs que toute publicité, sous quelque forme que ce soit, accessible par un service de communication au public en ligne, doit pouvoir être clairement identifiée comme telle. »
-            </p>
+    <section id="accueil" class="hero-section">
+        <div class="container hero-container animate-fade-in">
+            <div class="tag-label">
+                <i class="fa-solid fa-rocket"></i> Innovation Éducative 2026
+            </div>
+            <h1>L'avenir se construit <span class="accent-text">ici.</span></h1>
+            <p class="hero-subtitle">Plongez dans un écosystème d'apprentissage nouvelle génération où la technologie rencontre l'excellence académique.</p>
+            
+            <div class="hero-actions">
+                <a href="#services" class="btn btn-primary">Découvrir les outils</a>
+                <a href="#univers" class="btn btn-secondary">Le projet <i class="fa-solid fa-circle-play" style="margin-left: 4px;"></i></a>
+            </div>
+
+            <div class="recruitment-card">
+                <div class="recruitment-info-block">
+                    <div class="badge-new">
+                        <i class="fa-solid fa-circle-plus"></i> NOUVEAU
+                    </div>
+                    <h2>Campagne de Recrutement 2026-2027</h2>
+                    <p>Nous recherchons activement nos futurs talents, professeurs investis et délégués impliqués pour bâtir la prochaine année académique. Rejoignez notre structure dès maintenant !</p>
+                </div>
+                <div>
+                    <a href="#recrutement" class="btn btn-accent">Déposer ma candidature</a>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <p class="contact-info">
-            Veuillez retirer les contenus publicitaires non déclarés pour rétablir l'accès aux services.
-        </p>
-    </div>
+    <section id="recrutement" class="recruitment-hub">
+        <div class="container">
+            <div class="section-header">
+                <div class="tag-label">Recrutement</div>
+                <h2>Tous nos postes sont <span class="accent-text">Ouverts.</span></h2>
+                <p style="color: var(--text-muted); margin-top: 10px;">Consultez nos effectifs disponibles et déposez votre candidature instantanément.</p>
+            </div>
+
+            <div class="operation-note">
+                <i class="fa-solid fa-circle-info"></i>
+                <div>
+                    <p><strong>Note de fonctionnement importante (Campus Rosa Parks) :</strong></p>
+                    <p style="margin-top: 4px; font-weight: 400; color: #92400e;">Au sein du campus, l'ensemble des enseignements et le suivi pédagogique s'effectuent exclusivement sous la forme de cahiers de texte synchronisés (**PRONOTE**). Aucun cours ne se déroule en vocal.</p>
+                </div>
+            </div>
+
+            <div class="hub-grid">
+                
+                <div class="hub-category-card">
+                    <h3><i class="fa-solid fa-shield-halved"></i> Vie Scolaire & CA</h3>
+                    <p class="card-desc">Postes de gestion interne, encadrement et surveillance.</p>
+                    <div class="positions-list">
+                        <div class="position-row">
+                            <div class="position-info">
+                                <h4>Corps d'Assistance Éducative</h4>
+                                <span class="position-status status-open">Recrutement en cours</span>
+                            </div>
+                            <button class="btn-apply-sm" onclick="initiateApplication('Corps d\'Assistance Éducative')">Postuler</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hub-category-card">
+                    <h3><i class="fa-solid fa-school"></i> Corps Enseignant : Collège</h3>
+                    <p class="card-desc">Classes de la 6e à la 3e (Pronote uniquement).</p>
+                    <div class="positions-list">
+                        <script>
+                            const matieresCollege = [
+                                "Français", "Technologie", "Italien LV2", "Science, Vie & Terre", 
+                                "Éducation Physique & Sportive", "Mathématiques", "Anglais LV1", 
+                                "Espagnol LV2", "Dispositif Ulis", "Arts Plastiques", 
+                                "Physique-Chimie", "Histoire Géographie EMC", "Éducation Musicale"
+                            ];
+                            matieresCollege.forEach(item => {
+                                document.write(`
+                                    <div class="position-row">
+                                        <div class="position-info">
+                                            <h4>${item}</h4>
+                                            <span class="position-status status-open">Recrutement en cours</span>
+                                        </div>
+                                        <button class="btn-apply-sm" onclick="initiateApplication('Effectif du corps professoral : Collège', '${item}')">Postuler</button>
+                                    </div>
+                                `);
+                            });
+                        </script>
+                    </div>
+                </div>
+
+                <div class="hub-category-card">
+                    <h3><i class="fa-solid fa-building-columns"></i> Lycée Général & Techno</h3>
+                    <p class="card-desc">Tronc commun et Spécialités (Campus Bermonds / Rosa Parks).</p>
+                    <div class="positions-list">
+                        <script>
+                            const matieresLycee = [
+                                "Histoire Géographie EMC", "Enseignement Scientifique", 
+                                "Enseignement Technique en Langue Vivante", "Français", 
+                                "Histoire des Arts", "Espagnol LV2", "Anglais LV1", "Mathématiques", 
+                                "Options Arts Plastiques", "Philosophie", "Physique-Chimie", 
+                                "Sciences économiques et sociales (SES)", "Sciences numériques et technologie (SNT)", 
+                                "Science de la Vie et de la Terre", "Biologique et Physiopathologie Humaines (SPÉ)", 
+                                "Chimie, Biologie et Physiopathologie Humaines (SPÉ)", 
+                                "Histoire-géographie, géopolitique et sciences politiques (SPÉ)", 
+                                "Humanités, Littérature et Philosophie (SPÉ)", "Physique-Chimie Santé (SPÉ)", 
+                                "Sciences et techniques sanitaires et sociales (ST2S) (SPÉ)"
+                            ];
+                            matieresLycee.forEach(item => {
+                                document.write(`
+                                    <div class="position-row">
+                                        <div class="position-info">
+                                            <h4>${item}</h4>
+                                            <span class="position-status status-waiting">En attente de recrutement</span>
+                                        </div>
+                                        <button class="btn-apply-sm" onclick="initiateApplication('Effectif du corps professoral : Lycée Général et Technologie', '${item}')">Postuler</button>
+                                    </div>
+                                `);
+                            });
+                        </script>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="application-form-panel" id="form-panel" style="display: none;">
+                <div class="form-heading">
+                    <h3>Formulaire de Candidature Spécifique</h3>
+                    <p id="target-position-display"></p>
+                </div>
+                
+                <form id="discord-application-form" onsubmit="submitApplicationToDiscord(event)">
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-user"></i> Nom et Prénom IRL :</label>
+                            <input type="text" id="app-name" required placeholder="Ex: Jean Dupont">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-calendar-days"></i> Âge IRL :</label>
+                            <input type="number" id="app-age" min="13" max="99" required placeholder="Ex: 17">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-envelope"></i> Adresse Mail Professionnelle :</label>
+                        <input type="email" id="app-email" required placeholder="contact@votre-identite.fr">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-brain"></i> Vos Motivations :</label>
+                        <textarea id="app-motivations" rows="4" required placeholder="Décrivez en quelques phrases vos compétences et motivations..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-circle-question"></i> Pourquoi notre établissement (et pas un autre) ?</label>
+                        <textarea id="app-whyus" rows="3" required placeholder="Qu'est-ce qui vous attire chez Rosa Parks ?"></textarea>
+                    </div>
+
+                    <div class="checkbox-agreement-card">
+                        <input type="checkbox" id="app-engagement" required>
+                        <label for="app-engagement">
+                            <strong>Engagement RP Obligatoire :</strong> En cochant cette case, je m'engage formellement à effectuer les appels de manière journalière sur PRONOTE, à rester actif au sein de ma section et à honorer mes responsabilités académiques au quotidien.
+                        </label>
+                    </div>
+
+                    <button type="submit" id="btn-submit-app" class="btn btn-primary" style="width: 100%;">
+                        <i class="fa-solid fa-paper-plane"></i> Soumettre ma candidature au secrétariat
+                    </button>
+
+                    <div id="form-alert-container"></div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="communaute">
+        <div class="container">
+            <div class="section-header">
+                <div class="tag-label">Feedback</div>
+                <h2>Ils font le Campus.</h2>
+                <p>Paroles d'étudiants et de membres de l'administration qui font vivre l'écosystème au quotidien.</p>
+            </div>
+
+            <div class="testimonials-layout">
+                <div class="testimonial-block">
+                    <div>
+                        <div class="quote-icon-container"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="testimonial-text">"Franchement, c’est un très bon serveur. Dès le début, je me suis senti à l’aise et bien accueilli, et ce ressenti est resté le même avec le temps. L’ambiance est vraiment sympa au quotidien, surtout grâce aux personnes qu’on y rencontre."</p>
+                    </div>
+                    <div class="profile-meta">
+                        <h4>Hassani Noham</h4>
+                        <span>Assistant de Direction</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-block">
+                    <div>
+                        <div class="quote-icon-container"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="testimonial-text">"Très bon serveur dans l’ensemble. Je m’y sens vraiment très bien et à l’aise depuis mon arrivée (je suis là depuis un moment). J’ai eu la chance de rencontrer de belles personnes, bienveillantes et respectueuses, ce qui rend l’ambiance très agréable au quotidien."</p>
+                    </div>
+                    <div class="profile-meta">
+                        <h4>Chilain N.</h4>
+                        <span>Conseiller Principal d'Éducation</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-block">
+                    <div>
+                        <div class="quote-icon-container"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="testimonial-text">"très bon serveur ! Je suis content d’être professeur d’EPS dans ce collège , la direction sont extraordinaires, et ont un bon accueil."</p>
+                    </div>
+                    <div class="profile-meta">
+                        <h4>Membre de l'Équipe</h4>
+                        <span>Enseignant d'EPS</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-block">
+                    <div>
+                        <div class="quote-icon-container"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="testimonial-text">"Et si c’était vraiment votre avis ? Nous serions ravis de connaître votre point de vue, vos idées et vos impressions. Votre opinion compte pour nous et peut aider à améliorer notre site, nos services."</p>
+                    </div>
+                    <div class="profile-meta">
+                        <h4>Espace Étudiant</h4>
+                        <span>Avis Anonyme</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-block">
+                    <div>
+                        <div class="quote-icon-container"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="testimonial-text">"Et si c’était vraiment votre avis ? Nous serions ravis de connaître votre point de vue, vos idées et vos impressions. Votre opinion compte pour nous et peut aider à améliorer notre site, nos services."</p>
+                    </div>
+                    <div class="profile-meta">
+                        <h4>Espace Pédagogique</h4>
+                        <span>Retour d'expérience</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-block cta-feedback-block">
+                    <i class="fa-solid fa-circle-plus plus-icon"></i>
+                    <h3>Et si c’était vraiment votre avis ?</h3>
+                    <p>Nous serions ravis de connaître votre point de vue, vos idées et vos impressions. Votre opinion compte pour nous et peut aider à améliorer notre site, nos services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="final-cta-block">
+                <h2>Prêt à commencer l'aventure ?</h2>
+                <p>Rejoignez notre serveur Discord pour discuter avec l'administration, poser vos questions et intégrer le campus Rosa Parks.</p>
+                <a href="https://discord.gg/rosaparks" target="_blank" class="btn btn-primary" style="padding: 16px 40px; font-size: 1.05rem; background-color: #5865F2;">
+                    <i class="fa-brands fa-discord" style="font-size: 1.3rem;"></i> Contacter le Secrétariat
+                </a>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        <p>Assistance technique de <strong>FRENCHSTORE</strong></p>
+        <div class="container footer-grid-layout">
+            <div class="footer-about">
+                <h3><i class="fa-solid fa-graduation-cap"></i> ROSA PARKS</h3>
+                <p>L'excellence académique à portée de clic. Un environnement numérique conçu pour la réussite des étudiants de demain.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Navigation</h4>
+                <ul class="footer-links-list">
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#recrutement">Recrutement</a></li>
+                    <li><a href="#univers">L'Univers</a></li>
+                    <li><a href="#services">Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Ressources</h4>
+                <ul class="footer-links-list">
+                    <li><button class="footer-modal-trigger-btn" onclick="document.getElementById('modal-support').showModal()">Support Technique</button></li>
+                    <li><button class="footer-modal-trigger-btn" onclick="document.getElementById('modal-reglement').showModal()">Règlement Intérieur</button></li>
+                    <li><button class="footer-modal-trigger-btn" onclick="document.getElementById('modal-mentions').showModal()">Mentions Légales</button></li>
+                    <li><button class="footer-modal-trigger-btn" onclick="document.getElementById('modal-rgpd').showModal()">RGPD</button></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <div class="contact-info-item">
+                    <i class="fa-solid fa-display"></i>
+                    <span>Digital Campus Online</span>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>contact@campus-rosaparks.fr</span>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-copyright-bar">
+            © 2026 Campus Rosa Parks. Tous droits réservés. Design by Kaizen.
+        </div>
     </footer>
 
+    <dialog id="modal-support">
+        <div class="modal-window-header">
+            <h3><i class="fa-solid fa-headset"></i> Support Technique</h3>
+            <button class="modal-close-icon-btn" onclick="this.closest('dialog').close()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-window-body">
+            <form id="support-ticket-form" onsubmit="handleSupportSubmit(event)">
+                <div class="form-group">
+                    <label for="support-nature">Nature de la demande</label>
+                    <select id="support-nature" required>
+                        <option value="">Sélectionnez un motif...</option>
+                        <option value="connexion">Problème d'accès ENT / Pronote</option>
+                        <option value="discord">Difficulté sur le serveur Discord</option>
+                        <option value="candidature">Question relative aux recrutements</option>
+                        <option value="autre">Autre demande technique</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="support-desc">Description de votre problème</label>
+                    <textarea id="support-desc" rows="4" placeholder="Expliquez ici votre problème de manière détaillée..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer le ticket</button>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog id="modal-reglement">
+        <div class="modal-window-header">
+            <h3><i class="fa-solid fa-book"></i> Règlement Intérieur</h3>
+            <button class="modal-close-icon-btn" onclick="this.closest('dialog').close()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-window-body">
+            <div class="legal-scrollbox">
+                <h5>Article 1 - Dispositions Générales</h5>
+                <p>Le présent règlement s'applique à l'ensemble des membres de la communauté du Campus Rosa Parks. L'inscription implique l'acceptation pleine et entière des règles de vie commune.</p>
+                <h5>Article 2 - Comportement sur les espaces numériques</h5>
+                <p>Les espaces de discussion, serveurs Discord et plateformes ENT sont des outils d'apprentissage. Le respect mutuel, la courtoisie et la bienveillance sont obligatoires. Les propos discriminatoires, injurieux ou déplacés feront l'objet d'un bannissement immédiat.</p>
+                <h5>Article 3 - Assiduité et Travail</h5>
+                <p>Chaque étudiant s'engage à suivre le cursus de formation choisi, à consulter régulièrement l'espace Pronote et à participer de manière active aux projets collectifs initiés par l'équipe d'administration.</p>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="this.closest('dialog').close()">J'ai lu et j'accepte</button>
+        </div>
+    </dialog>
+
+    <dialog id="modal-mentions">
+        <div class="modal-window-header">
+            <h3><i class="fa-solid fa-scale-balanced"></i> Mentions Légales</h3>
+            <button class="modal-close-icon-btn" onclick="this.closest('dialog').close()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-window-body">
+            <div class="legal-scrollbox">
+                <h5>Éditeur de la plateforme</h5>
+                <p>Le Campus Rosa Parks est une structure numérique d'apprentissage gérée par l'équipe administrative de la communauté d'excellence connectée.</p>
+                <h5>Hébergement des infrastructures</h5>
+                <p>Les services d'authentification, de gestion de base de données et d'espaces de cours en ligne sont hébergés sur des serveurs sécurisés en France métropolitaine.</p>
+                <h5>Propriété intellectuelle</h5>
+                <p>L'ensemble des contenus pédagogiques, logos, et architectures de code de la plateforme sont protégés par le droit d'auteur. Toute reproduction non autorisée est interdite.</p>
+            </div>
+            <button class="btn btn-secondary" style="width: 100%;" onclick="this.closest('dialog').close()">Fermer la fenêtre</button>
+        </div>
+    </dialog>
+
+    <dialog id="modal-rgpd">
+        <div class="modal-window-header">
+            <h3><i class="fa-solid fa-user-shield"></i> Gestion du RGPD</h3>
+            <button class="modal-close-icon-btn" onclick="this.closest('dialog').close()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-window-body">
+            <p style="margin-bottom: 20px;">Nous accordons une importance cruciale à la protection de vos données privées et personnelles conformément aux réglementations européennes.</p>
+            <div class="rgpd-checkbox-card">
+                <label><input type="checkbox" checked disabled> Cookies Essentiels (Obligatoires)</label>
+                <p>Permettent le maintien de votre session connectée sur l'ENT et l'accès sécurisé à votre tableau de bord Pronote.</p>
+            </div>
+            <div class="rgpd-checkbox-card">
+                <label><input type="checkbox" id="rgpd-analytics"> Cookies Statistiques & Améliorations</label>
+                <p>Nous permettent d'analyser anonymement l'affluence du site pour fluidifier les serveurs lors des pics de connexions.</p>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="this.closest('dialog').close()">Enregistrer mes préférences</button>
+        </div>
+    </dialog>
+
+    <div class="custom-alert-overlay" id="custom-alert-space">
+        <div class="custom-alert-box">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h4>Espace non configuré</h4>
+            <p>Oups, nous n'avons pas encore configuré cet espace !</p>
+            <button class="btn btn-primary" onclick="closeCustomAlert()" style="padding: 10px 24px;">D'accord</button>
+        </div>
+    </div>
+
+    <script>
+        // Gestion des styles lors du scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Structure d'aiguillage des webhooks Discord fournis
+        const webhooksConfig = {
+            "Corps d'Assistance Éducative": "https://discord.com/api/webhooks/1508069487952400474/VdLwoYQabytP2o3m_-p25QFiEKZ_BnwP45AP6WF1Gt2XtlRwsVbmuD1-lprf3Rq9ERhg",
+            "Effectif du corps professoral : Collège": "https://discord.com/api/webhooks/1508069750775877642/3wK1FySLdt_3Oqt7p1yb_-BLdHaS9lsj1rVvKFbD0d-z5cpLaOZ4FuyPQLqnWOGXjhkF",
+            "Effectif du corps professoral : Lycée Général et Technologie": "https://discord.com/api/webhooks/1508069750775877642/3wK1FySLdt_3Oqt7p1yb_-BLdHaS9lsj1rVvKFbD0d-z5cpLaOZ4FuyPQLqnWOGXjhkF"
+        };
+
+        let currentSelectedCategory = "";
+        let currentSelectedMatiere = "";
+
+        // Lancement dynamique du formulaire au clic sur un poste
+        function initiateApplication(categorie, matiere = "") {
+            currentSelectedCategory = categorie;
+            currentSelectedMatiere = matiere;
+
+            const formPanel = document.getElementById('form-panel');
+            const targetDisplay = document.getElementById('target-position-display');
+            
+            targetDisplay.textContent = matiere ? `${categorie} • Spécialité : ${matiere}` : categorie;
+            formPanel.style.display = 'block';
+            
+            // Scroll fluide vers le formulaire
+            formPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Envoi asynchrone des données vers Discord sous format EMBED
+        async function submitApplicationToDiscord(event) {
+            event.preventDefault();
+            
+            const btnSubmit = document.getElementById('btn-submit-app');
+            const alertContainer = document.getElementById('form-alert-container');
+            
+            const name = document.getElementById('app-name').value;
+            const age = document.getElementById('app-age').value;
+            const email = document.getElementById('app-email').value;
+            const motivations = document.getElementById('app-motivations').value;
+            const whyUs = document.getElementById('app-whyus').value;
+            const engagement = document.getElementById('app-engagement').checked;
+
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Transmission en cours...`;
+            alertContainer.innerHTML = "";
+
+            const targetWebhook = webhooksConfig[currentSelectedCategory];
+
+            // Payload formaté en Embed structuré
+            const discordPayload = {
+                embeds: [{
+                    title: `✉️ Nouvelle Candidature Reçue`,
+                    color: 5178341, // Indigo / Bleu Roi
+                    timestamp: new Date().toISOString(),
+                    footer: { text: "Campus Rosa Parks • Recrutement Automatisé 2026" },
+                    fields: [
+                        { name: "🏢 Corps visé", value: currentSelectedCategory, inline: true },
+                        { name: "📚 Matière / Spécificité", value: currentSelectedMatiere || "Non applicable (Général)", inline: true },
+                        { name: "👤 Identité (IRL)", value: name, inline: true },
+                        { name: "🎂 Âge (IRL)", value: `${age} ans`, inline: true },
+                        { name: "📧 Adresse Email", value: email, inline: false },
+                        { name: "🧠 Motivations", value: motivations, inline: false },
+                        { name: "❓ Pourquoi nous ?", value: whyUs, inline: false },
+                        { name: "📜 Engagement PRONOTE / Activité", value: engagement ? "✅ Engagé et validé" : "❌ Refusé", inline: true }
+                    ]
+                }]
+            };
+
+            try {
+                const response = await fetch(targetWebhook, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(discordPayload)
+                });
+
+                if (response.ok) {
+                    alertContainer.innerHTML = `<div class="form-status-alert alert-success">✅ Votre candidature a été transmise avec succès au secrétariat via Discord !</div>`;
+                    document.getElementById('discord-application-form').reset();
+                    setTimeout(() => { document.getElementById('form-panel').style.display = 'none'; }, 6000);
+                } else {
+                    throw new Error("Erreur serveur Discord");
+                }
+            } catch (error) {
+                alertContainer.innerHTML = `<div class="form-status-alert alert-error">❌ Échec de la transmission. Veuillez vérifier vos connexions ou réessayer ultérieurement.</div>`;
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Soumettre ma candidature au secrétariat`;
+            }
+        }
+
+        // Logique de capture du formulaire de ticket
+        function handleSupportSubmit(event) {
+            event.preventDefault();
+            const supportDialog = document.getElementById('modal-support');
+            if (supportDialog) supportDialog.close();
+            document.getElementById('support-ticket-form').reset();
+            
+            setTimeout(() => {
+                const alertOverlay = document.getElementById('custom-alert-space');
+                if (alertOverlay) alertOverlay.style.display = 'flex';
+            }, 200);
+        }
+
+        function closeCustomAlert() {
+            const alertOverlay = document.getElementById('custom-alert-space');
+            if (alertOverlay) alertOverlay.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
